@@ -1,33 +1,207 @@
-<div id="home">
-  <div class="container">
-    <div class="row">
-      <div class="col-8 offset-2">
-        <h1>{{msg}}</h1>
-        <h2>This is our Home Page!</h2>
-        <form class="clearfix mb-4" action="POST">
-          <div class="form-group">
-            <label for="example-text">Example Text</label>
-            <input type="text" id="example-text" class="form-control" aria-describedby="example-text" placeholder="Enter Example Text">
-          </div>
-          <div class="form-group">
-            <label for="example-description">Example Description</label>
-            <textarea class="form-control" id="example-description" aria-describedby="example-description" placeholder="Enter Example Description"></textarea>
-          </div>
-          <button id="submit" class="btn btn-primary float-right">Submit</button>
-        </form>
-        <h3>Examples:</h3>
-        <ul id="example-list" class="list-group">
-          {{#each examples}}
-          <li data-id="{{this.id}}" class="list-group-item">
-            <a href="example/{{this.id}}">{{this.text}}</a>
-            <button class="btn btn-danger float-right delete">ｘ</button>
-          </li>
-          {{/each}}
-        </ul>
+
+ <nav>
+    <div class="nav-wrapper">
+        <a href="#" id="brand-logo">Pouches</a>
+        <img src="https://i.imgur.com/htgxCj4.gif" alt="kangaroo logo" class="right">
       </div>
     </div>
-  </div>
+  </nav>
+<div class="parallax-container">
+      <div class="parallax">
+          <img src="https://cdn2.hubspot.net/hubfs/145335/blog-image-uploads/free-case-study-template.jpg">
+        </div>
 </div>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
+<div class="container" id="formContainer">
+    <div class="formHFlex">
+        <h3 id="form-header">Enter Your Project Information Below</h3>
+        <a class="btn tooltipped" data-position="bottom" data-tooltip="Select the project type that most interests you and learn how similar strategies have fared.">?</a>
+    </div>
+    <div class="card">
+    <form id="new-project-form">
+        <div class="input-field col s6">
+              <input id="project-name" type="text" class="validate" required>
+              <label for="project-name">Your Project Name</label>
+          </div>    
+        <div class="row">
+            <div class="input-field col s6">
+                <select id="category">
+                    <option value="" disabled selected>Choose a category</option>
+                    <option value="art">Art</option>
+                    <option value="comics">Comics</option>
+                    <option value="crafts">Crafts</option>
+                    <option value="dance">Dance</option>
+                    <option value="design">Design</option>
+                    <option value="fashion">Fashion</option>
+                    <option value="film & video">Film & Video</option>
+                    <option value="food">Food</option>
+                    <option value="games">Games</option>
+                    <option value="journalism">Journalism</option>
+                    <option value="music">Music</option>
+                    <option value="photography">Photography</option>
+                    <option value="publishing">Publishing</option>
+                    <option value="technology">Technology</option>
+                    <option value="theater">Theater</option>
+                </select>
+                <label>Category</label>
+            </div>
+            <div class="input-field col s6">
+                <select id="country">
+                    <option value="" disabled selected>Choose a country</option>
+                    <option value="US">United States</option>
+                    <option value="GB">Great Britain</option>
+                    <option value="CA">Canada</option>
+                </select>
+                <label>Country</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s3 offset-s3">
+                <input id="min-goal" type="text" class="validate">
+                <label for="min-goal">Minimum Goal</label>
+            </div>
+            <div class="input-field col s3">
+                <input id="max-goal" type="text" class="validate">
+                <label for="max-goal">Maximum Goal</label> 
+            </div>
+        </div>
+        <div class="row">
+            <a id="submit-button" class="waves-effect waves-light btn-large col s2 offset-s4">Submit</a>
+            <a id="clear-form-button" class="waves-effect waves-light btn-small">Clear</a>
+        </div>
+    </form>
+    </div>
+</div>
+
+<div id="resultsContainer" class="container">  
+    <div class="card">
+       <div class="row">
+          <div class="col s2 offset-s2">
+            <h4>Results</h4>
+          </div> 
+        </div> 
+        <div class="row">
+          <div class="col s2 offset-s3">
+            <div id="pieChart" style="width:600px; height:400px;"></div> 
+          </div> 
+        </div> 
+        <ul class="collapsible popout">
+            <li>
+                <div class="collapsible-header">
+                    <i class="material-icons">check</i> Successes
+                 </div>
+                <div class="collapsible-body">
+                    <table class="highlight">
+                      <thead>
+                          <tr>
+                              <th>Name</th>
+                              <th>Category</th>
+                              <th>Country</th>
+                              <th>Pledged</th>
+                              <th>Goal</th>
+                              <th>Backers</th>
+                          </tr>
+                      </thead>
+                      <tbody id="successBody"></tbody> <!--successful results response appends here-->
+                    </table>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header">
+                    <i class="material-icons">close</i>Failures
+                 </div>
+                <div class="collapsible-body">
+                    <table class="highlight">
+                      <thead>
+                          <tr>
+                              <th>Name</th>
+                              <th>Category</th>
+                              <th>Country</th>
+                              <th>Pledged</th>
+                              <th>Goal</th>
+                              <th>Backers</th>
+                          </tr>
+                      </thead>
+                      <tbody id="failureBody"></tbody> <!--failure results response appends here-->
+                    </table>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="container" id="tabContainer">
+   <div class="card">
+    <div class="row">
+     <div class="col s2 offset-s2">
+       <h4 class="center-align">Trends</h3>
+     </div>
+     </div>
+     <div class="row">
+      <div class="s12">
+        <ul class="tabs">
+          <li class="tab col s3"><a class="active" href="#chart1">Category Tree Map</a></li>
+          <li class="tab col s3"><a href="#chart2">Category Columns</a></li>
+          <li class="tab col s3"><a href="#chart3">Funding v Duration</a></li>
+          <li class="tab col s3"><a href="#chart4">Funding v Goal</a></li>
+        </ul>
+      </div>
+     </div>
+
+      <div id="chart1" class="col s12">
+      </div>
+      <div id="chart2" class="col s12">
+      </div>
+      <div id="chart3" class="col s12">
+      </div>
+      <div id="chart4" class="col s12">
+      </div>
+    </div>
+</div>
+
+<div class="parallax-container">
+      <div class="parallax">
+          <img src="https://cdn-images-1.medium.com/max/2000/1*kauBinmv1CygIXKfE8eVYg.png">
+        </div>
+</div>
+
+<div id="userSearchesContainer" class="container">
+    <div class="card">
+    <div class="row">
+          <div class="col s2 offset-s2">
+            <h4>User Searches</h4>
+          </div> 
+        </div>
+      <ul class="collapsible popout">
+          <li class="active">
+            <div class="collapsible-header">
+                <i class="material-icons">list</i>
+            </div>
+            <div class="collapsible-body">
+                <table class="highlight">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Country</th>
+                            <th>Minimum Goal</th>
+                            <th>Maximum Goal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="searchesBody">{{!-- user searches append here --}}
+                    </tbody> 
+                </table>
+            </div>    
+        </ul>
+    </div>
+</div>
+
+<footer class="page-footer primary">
+    <div class="container">
+        <div class="row">
+            <p>
+            Made by Jacob Edwards, Jeff Anderson, Phillip Nguyen and Patrick Lehmann with lots of &#x1F355&#x1F436 	
+            </p>
+        </div>
+    </div>
+</footer>
